@@ -20,14 +20,21 @@ Uma versão preliminar recuperada registra uma fase intermediária do trabalho. 
 
 Nessa versão, a conclusão era que os totens tiveram impacto positivo na redução das ocorrências, com p-valor muito inferior a 5%, tanto no total quanto em cinco grupos de ocorrências.
 
+## O notebook mais completo
+
+O notebook recuperado mais próximo do trabalho final reúne o pipeline inteiro: coleta pela API, remoção de colunas pessoais, qualidade, pré-processamento, geoprocessamento, criação de features, análise exploratória, efetividade dos totens e indicação de novos locais. Ele nunca foi versionado e recebeu edições depois da entrega, até dezembro de 2025; por isso não separa com segurança o que foi entregue do que veio depois.
+
+Nele, o período é equilibrado em torno de 1º de abril de 2023, com o mesmo número de meses antes e depois. A efetividade é a variação percentual das ocorrências entre os períodos, dentro do raio, por tipo de totem e por totem. Os novos locais vêm de um DBSCAN com 50 metros, convertidos em graus, e mínimo de 500 ocorrências, aplicado fora do raio. O teste t pareado está em outro notebook do TCC e compara as contagens antes e depois por totem mais próximo.
+
 ## Leitura retrospectiva
 
-Revendo essa versão depois, identifiquei limitações no desenho que impedem sustentar essa conclusão. Entendê-las orientou o case atual:
+Revendo esse material depois, identifiquei limitações no desenho que impedem sustentar a conclusão da versão preliminar. Entendê-las orientou o case atual:
 
 - A série mensal já caía de forma contínua antes da instalação. A comparação entre os períodos atribui essa tendência aos totens.
 - Os cinco grupos foram escolhidos por terem caído mais dentro do raio do que fora, e depois testados nos mesmos dados. Selecionar pelo resultado infla a significância.
 - Contagens consecutivas são autocorrelacionadas. Isso viola a independência suposta pelo teste e reduz artificialmente o p-valor.
 - Parte dos clusters candidatos ficava junto a unidades policiais e de saúde, onde o endereço do registro pode não coincidir com o local do fato. O próprio trabalho listou o tratamento desses locais como melhoria.
+- No notebook mais completo, as regras compostas de alto risco comparam um código de risco que vai de 0 a 2 com o limiar 3, que nunca é atingido. Além disso, pela precedência dos operadores, força física, feridos em risco ou autor armado bastam para marcar alto risco. O case atual não usa esse indicador e define alto risco pelo rótulo revisado da própria fonte.
 
 ## O que foi preservado
 
@@ -46,4 +53,4 @@ Depois da entrega, tentei melhorar o projeto com ajuda do ChatGPT, ainda sem dom
 
 O case atual responde às limitações acima. Substitui notebooks avulsos por uma execução única, testada e rastreável; a base completa, por um acervo minimizado e pseudonimizado; e linhas repetidas, por protocolos reconciliados. Descreve proximidade geométrica, sem afirmações causais, e mantém a sugestão de novos locais como [proposta separada](19_proposta_cobertura_mclp.md).
 
-Os parâmetros de clustering mudaram entre as versões. Os notebooks recuperados do TCC usam 5 metros e mínimo de 5 ocorrências, enquanto a versão preliminar dos slides descreve agrupamentos em raios de 100 metros; não foi possível confirmar a configuração final. O notebook piloto posterior usou 50 metros, convertidos em graus, e mínimo de 500. A configuração do case, 150 metros e 50 registros, foi registrada durante o rebuild, em dezembro de 2025, como regra herdada do piloto, mas não aparece em nenhum notebook recuperado. Ela continua previamente fixada em relação ao case: foi definida antes da análise, e não ajustada aos resultados.
+Os parâmetros de clustering mudaram entre as versões. Os notebooks de maio de 2024 usam 5 metros e mínimo de 5 ocorrências; a versão preliminar dos slides descreve agrupamentos em raios de 100 metros; o notebook mais completo e o notebook piloto usam 50 metros, convertidos em graus, e mínimo de 500. Não foi possível confirmar qual configuração chegou à entrega. A configuração do case, 150 metros e 50 registros, foi registrada durante o rebuild, em dezembro de 2025, como regra herdada do piloto, mas não aparece em nenhum notebook recuperado. Ela continua previamente fixada em relação ao case: foi definida antes da análise, e não ajustada aos resultados.

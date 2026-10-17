@@ -53,7 +53,10 @@ scanner tem outro significado: desativar a verificação remota de credenciais.
 - Formatos de dados/exportação sem revisão, links simbólicos, submódulos, binários
   não previstos ou blobs maiores que 5 MiB. PNGs são admitidos apenas na pasta da
   demonstração sintética; isso não comprova por si só a origem de uma imagem.
-- Outputs, contagens de execução, anexos ou estado de widgets em notebooks.
+- Outputs, contagens de execução, anexos ou estado de widgets em notebooks. A única
+  exceção é `notebooks/99_storytelling_resultados.ipynb` com a execução sintética: os
+  outputs precisam do rótulo "Modo: synthetic" e não podem conter modo privado,
+  stderr, erros ou caminhos locais.
 - Novos indícios de segredos, sujeitos às limitações heurísticas do detect-secrets.
 - Erros críticos de Python identificados pelo Ruff: `E9`, `F63`, `F7`, `F82`.
 - Falha nos testes da CI ou alteração de arquivos rastreados durante sua execução.
@@ -65,13 +68,16 @@ permanece necessária.
 
 ## Exceções do scanner
 
-`.secrets.baseline` contém **18 achados revisados**, todos marcados como falsos
-positivos: hashes de commit e de artefatos no JSON de procedência da demonstração
-sintética. As exceções são vinculadas a arquivo, tipo e hash do valor; não liberam
+`.secrets.baseline` contém **25 achados revisados**, todos marcados como falsos
+positivos: 18 hashes de commit e de artefatos no JSON de procedência da demonstração
+sintética e as 7 figuras PNG embutidas em base64 na execução sintética do notebook. As exceções são vinculadas a arquivo, tipo e hash do valor; não liberam
 diretórios inteiros nem novos valores. Nenhum segredo real é aceito no baseline.
 
 Não regenere o baseline para silenciar falhas. Examine cada achado localmente,
 registre a justificativa e revise a diferença. Não imprima os valores candidatos nos logs.
+Reexecutar o notebook muda as linhas das figuras; no Windows, o hook também reescreve os
+caminhos com barra invertida. Aproveite apenas os novos números de linha e mantenha os
+caminhos com barra normal.
 
 ## Lint
 

@@ -21,7 +21,7 @@ python scripts/analysis/40_portfolio_case.py --mode synthetic
 
 O modo padrão gera dados, equipamentos e geografia sintéticos, com semente fixa. Não exige dados reais, API ou chave privada. Produz relatório Markdown, sete figuras, tabelas e metadados da execução em `data/portfolio_synthetic/`.
 
-O notebook `notebooks/99_storytelling_resultados.ipynb` usa esse mesmo fluxo. Notebooks versionados permanecem sem outputs.
+O [notebook de apresentação](notebooks/99_storytelling_resultados.ipynb) usa esse mesmo fluxo e já aparece executado com os dados sintéticos da demonstração.
 
 ## Estudo privado
 

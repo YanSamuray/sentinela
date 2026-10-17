@@ -50,10 +50,12 @@ def test_legacy_source_cannot_be_selected_as_private_dataset(tmp_path):
         case.run_case(mode="private", project=root, run_id="it")
 
 
-def test_versioned_notebook_has_no_outputs_and_defaults_to_synthetic():
+def test_versioned_notebook_has_only_synthetic_outputs_and_defaults_to_synthetic():
     root = Path(__file__).resolve().parents[1]
     notebook = json.loads((root / "notebooks/99_storytelling_resultados.ipynb").read_bytes())
-    assert all(not c.get("outputs") and c.get("execution_count") is None for c in notebook["cells"])
+    outputs = json.dumps([o for c in notebook["cells"] for o in c.get("outputs") or []], ensure_ascii=False)
+    if outputs != "[]":
+        assert "Modo: synthetic" in outputs and "Modo: private" not in outputs
     source = "\n".join("".join(c["source"]) for c in notebook["cells"])
     assert "mode='synthetic'" in source and "TOTENS_PORTFOLIO_RUN" in source
 

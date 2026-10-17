@@ -18,7 +18,7 @@ python scripts/analysis/40_portfolio_case.py --mode private --config config/sett
 
 `--run-id` permite identificar uma execução explicitamente. Um diretório existente é recusado. Os resultados sintéticos ficam em `data/portfolio_synthetic/<run_id>/`; os resultados reais ficam em `data/analytics/<run_id>/`. Ambos estão ignorados pelo Git. As camadas Bronze/Silver/Gold existentes são somente leitura.
 
-O notebook `notebooks/99_storytelling_resultados.ipynb` executa o mesmo fluxo sintético por padrão. Para consumir um estudo privado já concluído, forneça seu diretório na variável `TOTENS_PORTFOLIO_RUN`. Isso exige a chave DPAPI original. O leitor verifica estado, assinatura privada e hashes dos artefatos antes de exibir resultados. A versão rastreada do notebook permanece sem outputs; cópias executadas e resultados detalhados são privados.
+O notebook `notebooks/99_storytelling_resultados.ipynb` executa o mesmo fluxo sintético por padrão. Para consumir um estudo privado já concluído, forneça seu diretório na variável `TOTENS_PORTFOLIO_RUN`. Isso exige a chave DPAPI original. O leitor verifica estado, assinatura privada e hashes dos artefatos antes de exibir resultados. A versão rastreada traz apenas a execução sintética da demonstração publicada, gerada por `scripts/analysis/45_execute_storytelling_notebook.py`; o check de índice recusa outputs sem o rótulo sintético. Execuções privadas e resultados detalhados ficam fora do Git.
 
 ## Unidade, alvo e elegibilidade
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 from io import BytesIO
 from pathlib import Path, PurePosixPath
+import re
 import subprocess
 
 
@@ -20,6 +21,10 @@ PRIVATE_SUFFIXES = {
 }
 MAX_BYTES = 5 * 1024 * 1024
 PUBLIC_FIGURES = "docs/assets/synthetic_demo/figures/"
+# The storytelling notebook is versioned with its synthetic execution only.
+SYNTHETIC_NOTEBOOK = "notebooks/99_storytelling_resultados.ipynb"
+SYNTHETIC_MARKER = "Modo: synthetic"
+NON_SYNTHETIC_OUTPUT = re.compile(r"(?i)Modo: private|[a-z]:[\\/]{1,2}users|/home/|onedrive")
 
 
 def git(root: Path, *args: str, input_data: bytes | None = None) -> bytes:
@@ -47,6 +52,19 @@ def path_issue(path: str) -> str | None:
     return None
 
 
+def _synthetic_outputs_only(cells: list[dict]) -> bool:
+    """Outputs must carry the synthetic marker and no error, stderr, private mode or local path."""
+    texts = []
+    for cell in cells:
+        for output in cell.get("outputs") or []:
+            if output.get("output_type") == "error" or output.get("name") == "stderr":
+                return False
+            data = {k: v for k, v in (output.get("data") or {}).items() if k != "image/png"}
+            texts.append(json.dumps([data, output.get("text", "")], ensure_ascii=False))
+    text = "\n".join(texts)
+    return SYNTHETIC_MARKER in text and not NON_SYNTHETIC_OUTPUT.search(text)
+
+
 def content_issues(path: str, content: bytes) -> list[str]:
     if len(content) > MAX_BYTES:
         return ["oversized_blob"]
@@ -56,9 +74,11 @@ def content_issues(path: str, content: bytes) -> list[str]:
             cells = notebook["cells"]
             if not isinstance(cells, list) or not all(isinstance(c, dict) for c in cells):
                 return ["invalid_notebook"]
-            if any(c.get("outputs") or c.get("execution_count") is not None
-                   or c.get("attachments") for c in cells):
+            if any(c.get("attachments") for c in cells):
                 return ["notebook_outputs_or_attachments"]
+            if any(c.get("outputs") or c.get("execution_count") is not None for c in cells):
+                if path != SYNTHETIC_NOTEBOOK or not _synthetic_outputs_only(cells):
+                    return ["notebook_outputs_or_attachments"]
             if notebook.get("metadata", {}).get("widgets"):
                 return ["notebook_widget_state"]
         except (ValueError, KeyError, TypeError, AttributeError):

@@ -108,6 +108,37 @@ def test_template_and_clean_notebook_are_allowed(repo):
     assert not guard.check_index(repo)
 
 
+STORYTELLING = "notebooks/99_storytelling_resultados.ipynb"
+SYNTHETIC_DISPLAY = {"output_type": "display_data", "data": {"text/markdown": "**Modo: synthetic — execução: demo**"}}
+
+
+def executed_notebook(*outputs):
+    return json.dumps({"cells": [{"cell_type": "code", "execution_count": 1, "outputs": list(outputs)}]}).encode()
+
+
+def test_storytelling_notebook_accepts_synthetic_outputs(repo):
+    stage(repo, STORYTELLING, executed_notebook(SYNTHETIC_DISPLAY))
+    assert not guard.check_index(repo)
+
+
+@pytest.mark.parametrize("outputs", [
+    [],
+    [{"output_type": "stream", "name": "stdout", "text": "unmarked execution"}],
+    [SYNTHETIC_DISPLAY, {"output_type": "display_data", "data": {"text/markdown": "**Modo: private — execução: real**"}}],
+    [SYNTHETIC_DISPLAY, {"output_type": "stream", "name": "stderr", "text": "warning"}],
+    [SYNTHETIC_DISPLAY, {"output_type": "stream", "name": "stdout", "text": "C:\\Users\\someone\\run"}],
+    [SYNTHETIC_DISPLAY, {"output_type": "error", "ename": "ValueError", "evalue": "synthetic", "traceback": []}],
+])
+def test_storytelling_notebook_rejects_non_synthetic_outputs(repo, outputs):
+    stage(repo, STORYTELLING, executed_notebook(*outputs))
+    assert (STORYTELLING, "notebook_outputs_or_attachments") in guard.check_index(repo)
+
+
+def test_synthetic_outputs_are_rejected_in_other_notebooks(repo):
+    stage(repo, "notebooks/01_eda.ipynb", executed_notebook(SYNTHETIC_DISPLAY))
+    assert ("notebooks/01_eda.ipynb", "notebook_outputs_or_attachments") in guard.check_index(repo)
+
+
 def test_secret_hook_checks_staged_content_and_redacts_output(repo):
     executable = shutil.which("pre-commit")
     if executable is None:
