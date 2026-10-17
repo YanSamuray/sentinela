@@ -1,0 +1,4 @@
+# Initial blocking rules; broader legacy lint remains a separate cleanup task.
+# Explicit config avoids inheriting user/machine-level Ruff settings in CI.
+target-version = "py312"
+lint.select = ["E9", "F63", "F7", "F82"]

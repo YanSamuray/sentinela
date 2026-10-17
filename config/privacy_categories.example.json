@@ -1,0 +1,16 @@
+{
+  "nivelRisco": ["Baixo", "Médio", "Alto"],
+  "classificacaoSituacao": ["SITUACAO SINTETICA"],
+  "origemRegistro": ["ORIGEM SINTETICA"],
+  "localizacao.municipio": ["MUNICIPIO SINTETICO"],
+  "grupo.descricao": ["GRUPO SINTETICO"],
+  "fatoComunicado.descricao": ["NATUREZA SINTETICA"],
+  "fatoComunicado.grupo": ["GRUPO SINTETICO"],
+  "fatoConstatado[].descricao": ["NATUREZA SINTETICA"],
+  "fatoConstatado[].grupo": ["GRUPO SINTETICO"],
+  "codigoEncerramento.descricao": ["ENCERRAMENTO SINTETICO"],
+  "unidades[].descricao": ["UNIDADE SINTETICA"],
+  "areasDespacho[].descricao": ["AREA SINTETICA"],
+  "centraisAtendimento[].descricao": ["CENTRAL SINTETICA"],
+  "perguntasNivelRisco[].pergunta": ["Há pessoas feridas em risco de morte?", "Autor do fato está armado?"]
+}

@@ -1,0 +1,32 @@
+# Active private lake: authenticated minimized inputs only.
+[paths]
+data_root = "data"
+metadata_root = "data/metadata"
+reports_dir = "data/reports"
+bronze_dir = "data/bronze/ocorrencia"
+bronze_cadastros = "data/reference/cadastros_v2"
+bronze_manifest = "data/metadata/rebuild/verified_bronze_manifest.jsonl"
+silver_dir = "data/silver"
+gold_dir = "data/gold"
+
+# Compatibility settings for historical processors; no operation date is asserted.
+[analytics]
+raio_totem_metros = 300.0
+
+[portfolio]
+geography_dir = "data/reference/geospatial"
+reference_version = "cadastros_v2"
+
+[portfolio.spatial]
+eps = 150
+min_samples = 50
+grid_size = 1000
+eps_values = [100, 150, 300]
+min_values = [25, 50, 100]
+radii = [150, 300, 500]
+
+[portfolio.forecast]
+horizon = 30
+validation_blocks = 6
+test_blocks = 3
+min_train = 365

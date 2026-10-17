@@ -1,0 +1,65 @@
+{
+  "mode": "synthetic",
+  "seed": 42,
+  "real_data_exported": false,
+  "run_id": "portfolio_final_20261007",
+  "case_version": "1.0.0",
+  "git_commit_at_execution": "8f503c44f0aab8994f0820f7dbd79830623620fb",
+  "git_dirty_at_execution": true,
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "2.3.3",
+    "geopandas": "1.1.2",
+    "pyarrow": "22.0.0",
+    "scikit_learn": "1.8.0"
+  },
+  "effective_parameters": {
+    "spatial": {
+      "eps": 150,
+      "min_samples": 50,
+      "grid_size": 1000,
+      "eps_values": [
+        100,
+        150,
+        300
+      ],
+      "min_values": [
+        25,
+        50,
+        100
+      ],
+      "radii": [
+        150,
+        300,
+        500
+      ]
+    },
+    "forecast": {
+      "horizon": 30,
+      "validation_blocks": 6,
+      "test_blocks": 3,
+      "min_train": 365
+    }
+  },
+  "implementation_sha256": {
+    "src\\totens\\portfolio\\case.py": "9a2230648b55bc5ae841b1015c2c4ca0d16186578a95fb9b80ad2c9a74121510",
+    "src\\totens\\portfolio\\data.py": "70fbcfc32bfb585428b795be501ae6e50942e0d0ef164efec475e2a083a74057",
+    "src\\totens\\portfolio\\forecast.py": "a4d04f2b6841a7742859ab5050a1c10e6f9c415dcbe0a826179a8e2eeb68534c",
+    "src\\totens\\portfolio\\io.py": "b0a634251b0845a9d0f978d3e154feaaaf2fe8770d6c0cd67f32eee913c3667f",
+    "src\\totens\\portfolio\\parameters.py": "90261823abe788b00241ace86b9e349d0d3f3bc9357edd6d66341f4ceaded16d",
+    "src\\totens\\portfolio\\report.py": "a79c82c04a60f7f861de77bfddfcada3ed6243d31d4ff0d1837eb2403502ea47",
+    "src\\totens\\portfolio\\spatial.py": "54f91ae063b5e14fbdfa86bdff3c66cfeaa9b9748d166bd23ecdcb69b5030d05",
+    "src\\totens\\portfolio\\__init__.py": "c34acda912c2dcdfb6bd41405ab064f2e45942ebcc691558dc4812d52cf62a7b"
+  },
+  "source_metadata_sha256": "71de05bb509b58e23c4927810033c4819bd20397f5cabcf2b9e9284f265bdddc",
+  "artifacts": {
+    "report.md": "25339e70c2ca79c24022627814f41a571b4b88cab173d011171a514db6036d63",
+    "figures/coverage.png": "e32442425a27bd10d0fd0fd7e2b1287509b5eb1df40c6dadfb4b459c63441bcf",
+    "figures/forecast_comparison.png": "5c1c5ea72175f287b2a2ec46dc500fe35521850735e531a10a1244454d8ffd99",
+    "figures/forecast_horizon.png": "64e40ad113921ca269e973659ebcb5dc9f3ed05df1b08b86291b9bb40ed41cff",
+    "figures/forecast_test.png": "55bc04c78a8323ce4f334d56a0cbf02ba71ca34942f178eed76d0ddf6f7bdce7",
+    "figures/monthly.png": "c714a7da9e63745522188ae00c55e143a630da110b28512d8422542a66403bf0",
+    "figures/quality.png": "ca0599fa52cbc01938db6f4c5820f7d5033838b2ce5e8efc8fda2fe1b6d93f41",
+    "figures/spatial.png": "bd1bb73d086618431a2e0030353070ec658633c08e73939cade260cfa2b6182a"
+  }
+}

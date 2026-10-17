@@ -1,0 +1,42 @@
+[project]
+name = "totens"
+version = "0.1.0"
+description = "Engenharia de dados e análise geoespacial de ocorrências e totens de segurança em Rondônia"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "duckdb>=1.4.3",
+    "folium>=0.20.0",
+    "geopandas>=1.1.2",
+    "holidays==0.87",
+    "mapclassify>=2.10.0",
+    "matplotlib>=3.10.8",
+    "pandas>=2.3.3",
+    "plotly>=6.5.0",
+    "prophet>=1.2.1",
+    "pyarrow>=22.0.0",
+    "python-dotenv>=1.2.1",
+    "requests>=2.32.5",
+    "scikit-learn>=1.8.0",
+    "scipy>=1.16.3",
+    "seaborn>=0.13.2",
+    "shapely>=2.1.2",
+    "streamlit>=1.52.2",
+    "streamlit-folium>=0.25.3",
+    "unidecode>=1.4.0",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+    "jupyterlab>=4.5.1",
+    "pytest>=9.0.2",
+    "ruff>=0.14.9",
+]
+
+[build-system]
+requires = ["uv_build>=0.9.17,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv]
+package = true

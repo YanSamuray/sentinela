@@ -1,0 +1,56 @@
+# --- Python & Sistema Operacional ---
+__pycache__/
+*.py[cod]
+*.so
+.DS_Store
+Thumbs.db
+
+# --- Ambiente Virtual & Gerenciadores ---
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+config/settings.local.toml
+config/privacy_categories.local.json
+.secrets/
+# Nota: Mantemos o uv.lock e pyproject.toml no git para garantir as versões
+
+# --- Dados (Data Lake Local) ---
+# Não sobe dado para o GitHub
+data/**
+
+# Permite arquivos marcadores para manter estrutura de pastas
+!data/**/.gitkeep
+!data/**/.gitignore
+
+# --- Relatórios Gerados ---
+reports/
+
+# --- Logs e Metadados de Execução ---
+*.log
+metadata/
+
+# --- IDEs e Editores ---
+.vscode/
+.idea/
+*.swp
+
+# --- Arquivos Temporários e Legado ---
+temp/
+legacy/
+# Acervo recuperado do TCC: contém bases, outputs e credenciais locais.
+/archive/
+.pytest_cache/
+.ruff_cache/
+
+# --- Notebooks / BI ---
+# Se você NÃO quiser versionar notebooks:
+notebooks/*
+# O notebook principal do case é versionado (sem outputs):
+!notebooks/99_storytelling_resultados.ipynb
+
+bi/
+
+predictions/
